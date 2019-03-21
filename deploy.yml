@@ -14,6 +14,7 @@
         sleep: 30
         timeout: 1200
         connect_timeout: 10
+  tags: infra
 
 - hosts: nodes
   roles:
@@ -29,12 +30,6 @@
   import_playbook: /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
   tags: ocp-deploy
   
-- name: install Grafana
-  import_playbook: /usr/share/ansible/openshift-ansible/playbooks/openshift-grafana/config.yml
-  tags: 
-    - logging-metrics
-    - ocp-deploy
-
 - hosts: nodes
   roles:
     - { role: ocp_post, tags: ocp-post }
