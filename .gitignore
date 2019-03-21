@@ -2,3 +2,7 @@
 *.retry
 vars.yml
 **.log
+*.log.bkp*
+hosts.*~
+az-sp.json
+*.swp
