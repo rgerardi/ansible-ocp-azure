@@ -6,3 +6,4 @@ vars.yml
 hosts.*~
 az-sp.json
 *.swp
+vault.yml
