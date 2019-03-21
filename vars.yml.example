@@ -2,6 +2,7 @@
 # defaults file for azure_infra
 state: present
 location: eastus
+# Resource Group
 rg: "test"
 
 #######################
@@ -30,6 +31,12 @@ vm_size_cns:    Standard_D8s_v3
 vm_size_bastion: Standard_D1
 
 #######################
+# If using smaller instances. Set low_mem to disable memory checks (Dev/test)
+#######################
+low_mem: false
+
+
+#######################
 # SSH user for all VMs created
 #######################
 admin_user: cloud-user
@@ -56,6 +63,7 @@ sp_secret: 'password'
 # RHSM
 # Username / Password or
 # Activation key / OrgId
+# Place this in vars file that can be encrypted in root of play and not checked into SCM
 #######################
 rhsm_user: ''
 rhsm_pass: ''
@@ -70,15 +78,23 @@ rhsm_ocs_pool: ""
 rhsm_repos:
   - rhel-7-server-rpms
   - rhel-7-server-extras-rpms
-  - rhel-7-server-ose-3.10-rpms
+  - rhel-7-server-ose-3.11-rpms
   - rhel-7-fast-datapath-rpms
-  - rhel-7-server-ansible-2.4-rpms
+  - rhel-7-server-ansible-2.6-rpms
 bastion_pkgs:
   - ansible
   - atomic-openshift-clients
   - git
   - tmux
   - screen
+
+#######################
+# registry
+# Place this in vars file that can be encrypted in root of play and not checked into SCM
+#######################
+registry_user: ""
+registry_password: ""
+
 
 #######################
 # Network
@@ -193,7 +209,8 @@ deploy_prometheus: true
 # volume sizing defaults
 metrics_volume_size: 25
 logging_volume_size: 100
-prometheus_volume_size: 25
+prometheus_volume_size: 50
+alertmanager_volume_size: 2
 
 # OpenShift Container StorageClass
 # Sizes in Gi
