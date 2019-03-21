@@ -44,9 +44,9 @@
   retries: 10
   delay: 30
   when: 
-    - ( inventory_hostname in groups.masters ) or
-      ( inventory_hostname in groups.infra ) or 
-      ( inventory_hostname in groups.glusterfs )
+    - ( inventory_hostname in groups['masters'] ) or
+      ( inventory_hostname in groups['infra'] ) or 
+      ( inventory_hostname in groups['glusterfs'] )
     - rhsm_user is defined and rhsm_user != ""
     - rhsm_pass is defined and rhsm_pass != ""
 
@@ -61,9 +61,9 @@
   retries: 10
   delay: 30
   when: 
-    - ( inventory_hostname in groups.masters ) or
-      ( inventory_hostname in groups.infra )   or 
-      ( inventory_hostname in groups.glusterfs )
+    - ( inventory_hostname in groups['masters'] ) or
+      ( inventory_hostname in groups['infra'] ) or 
+      ( inventory_hostname in groups['glusterfs'] )
     - rhsm_key is defined and rhsm_key != ""
     - rhsm_org is defined and rhsm_org != ""
 
@@ -72,9 +72,9 @@
     state: absent
     pool_ids: "{{ rhsm_node_pool }}"
   when: 
-    - ( inventory_hostname in groups.masters ) or
-      ( inventory_hostname in groups.infra )   or 
-      ( inventory_hostname in groups.glusterfs )
+    - ( inventory_hostname in groups['masters'] ) or
+      ( inventory_hostname in groups['infra'] ) or 
+      ( inventory_hostname in groups['glusterfs'] )
     - rhsm_node_pool != rhsm_broker_pool
 
 - name: Azure | RHSM register (username-passwd) Application nodes 
@@ -89,9 +89,9 @@
   retries: 10
   delay: 30
   when: 
-    - inventory_hostname not in groups.masters 
-    - inventory_hostname not in groups.infra 
-    - inventory_hostname not in groups.glusterfs
+    - inventory_hostname not in groups['masters'] 
+    - inventory_hostname not in groups['infra'] 
+    - inventory_hostname not in groups['glusterfs']
     - rhsm_user is defined and rhsm_user != ""
     - rhsm_pass is defined and rhsm_pass != ""
 
@@ -107,9 +107,9 @@
   retries: 10
   delay: 30
   when:
-    - inventory_hostname not in groups.masters 
-    - inventory_hostname not in groups.infra 
-    - inventory_hostname not in groups.glusterfs
+    - inventory_hostname not in groups['masters'] 
+    - inventory_hostname not in groups['infra'] 
+    - inventory_hostname not in groups['glusterfs']
     - rhsm_key is defined and rhsm_key != ""
     - rhsm_org is defined and rhsm_org != ""
 
